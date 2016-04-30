@@ -12,13 +12,17 @@ function dice(){
 }
 
 function getWord(){
-	grep $1 $2 | cut -f 2
+	for (( i = 0; i < 5; i++ )); do
+		new=$(dice)
+		code=$code$new
+	done
+	grep $code $1 | cut -f 2
 }
+
 
 if [ $# -eq 0 ]
 then
-        usage
-        exit 0
+	gui=true
 fi
 
 while getopts "hl:n:" option; do
@@ -38,21 +42,18 @@ while getopts "hl:n:" option; do
 	esac
 done
 
+if [[ gui == true ]]; then
+	echo "hello"
+fi
+
 echo "You ask for a $number words paraphrase"
 echo "-------------------------------------"
 
 for (( i = 0; i < $number; i++ )); do
 	new=''
 	code=''
-	word=''
-	for (( j = 0; j < 5; j++ )); do
-		new=$(dice)
-		code=$code$new
-		printf "$new"
-	done
-
-	word=$(getWord $code $wordlist)
-	printf " : $word\n"
+	word=$(getWord $wordlist)
+	printf "$word\n"
 	paraphrase="$paraphrase $word"
 done
 
