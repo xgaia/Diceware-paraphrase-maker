@@ -38,7 +38,7 @@ while getopts "hl:n:" option; do
 	esac
 done
 
-echo "You ask for a $number word paraphrase"
+echo "You ask for a $number words paraphrase"
 echo "-------------------------------------"
 
 for (( i = 0; i < $number; i++ )); do
