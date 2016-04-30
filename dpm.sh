@@ -33,6 +33,7 @@ while getopts "hl:n:" option; do
 done
 
 echo "You ask for a $number word paraphrase"
+echo "-------------------------------------"
 
 for (( i = 0; i < $number; i++ )); do
 	new=''
@@ -41,9 +42,14 @@ for (( i = 0; i < $number; i++ )); do
 	for (( j = 0; j < 5; j++ )); do
 		new=$(dice)
 		code=$code$new
+		printf "$new"
 	done
+
 	word=$(getWord $code $wordlist)
+	printf " : $word\n"
 	paraphrase="$paraphrase $word"
 done
 
-echo "your new paraphrase is $paraphrase"
+echo "-------------------------------------"
+echo "$paraphrase"
+echo "-------------------------------------"
