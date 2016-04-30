@@ -15,6 +15,12 @@ function getWord(){
 	grep $1 $2 | cut -f 2
 }
 
+if [ $# -eq 0 ]
+then
+        usage
+        exit 0
+fi
+
 while getopts "hl:n:" option; do
 	case $option in
 		h)
