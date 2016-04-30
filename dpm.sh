@@ -1,7 +1,7 @@
 #! /bin/bash
 
 function usage(){
-	printf "Usage :\n"
+	printf "Usage : dpm -n 7 -l wordlist\n\n"
 	printf "\t-n      number of random word\n"
 	printf "\t-l      path to the wordlist\n"
 	printf "\t-h      diplay this help\n"
@@ -12,12 +12,29 @@ function dice(){
 }
 
 function getWord(){
-	grep $1 wordlist | cut -f 2
+	grep $1 $2 | cut -f 2
 }
 
-echo "You ask for a $1 word paraphrase"
+while getopts "hl:n:" option; do
+	case $option in
+		h)
+			usage
+			exit
+		;;
 
-for (( i = 0; i < $1; i++ )); do
+		l)
+			wordlist=$OPTARG
+		;;
+
+		n)
+			number=$OPTARG
+		;;
+	esac
+done
+
+echo "You ask for a $number word paraphrase"
+
+for (( i = 0; i < $number; i++ )); do
 	new=''
 	code=''
 	word=''
@@ -25,7 +42,7 @@ for (( i = 0; i < $1; i++ )); do
 		new=$(dice)
 		code=$code$new
 	done
-	word=$(getWord $code)
+	word=$(getWord $code $wordlist)
 	paraphrase="$paraphrase $word"
 done
 
