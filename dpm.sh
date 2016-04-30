@@ -1,5 +1,12 @@
 #! /bin/bash
 
+function usage(){
+	printf "Usage :\n"
+	printf "\t-n      number of random word\n"
+	printf "\t-l      path to the wordlist\n"
+	printf "\t-h      diplay this help\n"
+}
+
 function dice(){
 	tr -cd '1-6' < /dev/urandom | head -c 1;echo
 }
