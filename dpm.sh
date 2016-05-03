@@ -15,6 +15,15 @@ function getWord(){
 	grep $1 $2 | cut -f 2
 }
 
+function drawLine(){
+	string=$1
+	len=${#string}
+	for (( i = 0; i < $len; i++ )); do
+		printf "-"
+	done
+	printf "\n"
+}
+
 if [ $# -eq 0 ]
 then
         usage
@@ -38,8 +47,9 @@ while getopts "hl:n:" option; do
 	esac
 done
 
-echo "You ask for a $number words paraphrase"
-echo "-------------------------------------"
+intro=$(echo "You ask for a $number words paraphrase")
+echo "$intro"
+drawLine "$intro"
 
 for (( i = 0; i < $number; i++ )); do
 	new=''
@@ -55,7 +65,8 @@ for (( i = 0; i < $number; i++ )); do
 	printf " : $word\n"
 	paraphrase="$paraphrase $word"
 done
+paraphrase=$(echo $paraphrase | sed 's/^\ //') #remove first space
 
-echo "-------------------------------------"
+drawLine "$paraphrase"
 echo "$paraphrase"
-echo "-------------------------------------"
+drawLine "$paraphrase"
