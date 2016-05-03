@@ -51,6 +51,12 @@ intro=$(echo "You ask for a $number words paraphrase")
 echo "$intro"
 drawLine "$intro"
 
+if [[ $number < 5 ]]; then
+	warning=$(echo "/!\ Diceware paraphrase less than 5 words are not secure ! /!\ ")
+	echo $warning
+	drawLine "$warning"
+fi
+
 for (( i = 0; i < $number; i++ )); do
 	new=''
 	code=''
