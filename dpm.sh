@@ -47,12 +47,12 @@ while getopts "hl:n:" option; do
 	esac
 done
 
-intro=$(echo "You ask for a $number words paraphrase")
+intro=$(echo "You ask for a $number words passphrase")
 echo "$intro"
 drawLine "$intro"
 
 if [[ $number < 5 ]]; then
-	warning=$(echo "/!\ Diceware paraphrase less than 5 words are not secure ! /!\ ")
+	warning=$(echo "/!\ Diceware passphrase less than 5 words are not secure ! /!\ ")
 	echo $warning
 	drawLine "$warning"
 fi
@@ -69,10 +69,10 @@ for (( i = 0; i < $number; i++ )); do
 
 	word=$(getWord $code $wordlist)
 	printf " : $word\n"
-	paraphrase="$paraphrase $word"
+	passphrase="$passphrase $word"
 done
-paraphrase=$(echo $paraphrase | sed 's/^\ //') #remove first space
+passphrase=$(echo $passphrase | sed 's/^\ //') #remove first space
 
-drawLine "$paraphrase"
-echo "$paraphrase"
-drawLine "$paraphrase"
+drawLine "$passphrase"
+echo "$passphrase"
+drawLine "$passphrase"

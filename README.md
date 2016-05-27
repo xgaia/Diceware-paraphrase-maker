@@ -1,1 +1,1 @@
-# Diceware-paraphrase-maker
+# Diceware-passphrase-maker
